@@ -23,12 +23,10 @@ userController.updateUser = async (req, res) => {
         if (!user) {
             return res.status(404).json({ mensagem: "User not found!" });
         }
-
         if (nome) user.nome = nome;
         if (email) user.email = email;
         if (senha) user.senha = await bcrypt.hash(senha, 10);
         if (funcao) user.funcao = funcao;
-
         await user.save();
         return res.status(200).json(user);
     } catch (err) {
