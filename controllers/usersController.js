@@ -4,7 +4,7 @@ const UserModel = require('../models/user');
 const auth = require('../middlewares/auth');
 const userController = express.Router();
 
-userController.getAllUsers = async (req, res) => {
+userController.getTodosUsers = async (req, res) => {
     try {
         const users = await UserModel.find({});
         return res.status(200).json(users);
@@ -14,7 +14,7 @@ userController.getAllUsers = async (req, res) => {
     }
 };
 
-userController.updateUser = async (req, res) => {
+userController.updateUmUser = async (req, res) => {
     const { id } = req.params;
     const { nome, email, senha, funcao } = req.body;
 
@@ -35,7 +35,7 @@ userController.updateUser = async (req, res) => {
     }
 };
 
-userController.createUser = async (req, res) => {
+userController.createUmUser = async (req, res) => {
     const { nome, email, senha, funcao } = req.body;
     const senhaEncrypt = await bcrypt.hash(senha, 10);
     const user = new UserModel({
@@ -54,7 +54,7 @@ userController.createUser = async (req, res) => {
     }
 };
 
-userController.deleteUser = async (req, res) => {
+userController.deleteUmUser = async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -69,7 +69,7 @@ userController.deleteUser = async (req, res) => {
     }
 };
 
-userController.countUsersByRole = async (req, res) => {
+userController.countUsersPorCargo = async (req, res) => {
     try {
         const roles = ["Engenheiro de FE", "Engenheiro de BE", "Analista de dados", "Líder Técnico"];
         const counts = await Promise.all(roles.map(async (role) => {
